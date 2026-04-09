@@ -40,10 +40,10 @@ namespace math
         return a % b;
     }
 
-    int pow(int a, int b)
+    int pow(int a, unsigned int b)
     {
         int result = 1;
-        for (size_t i = 0; i < b; i++)
+        for (unsigned int i = 0; i < b; i++)
         {
             if (result > INT_MAX / a)
             {
@@ -56,7 +56,7 @@ namespace math
         
     }
 
-    int factorial(int a)
+    int factorial(unsigned int a)
     {
         static int maxFactorial = 12;
         int result = 1;
