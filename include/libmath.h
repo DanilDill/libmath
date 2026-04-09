@@ -1,6 +1,8 @@
 #pragma once
 #include <climits>
 
+#define DIV_BY_ZERO -1
+#define OVERFLOW -2
 namespace math 
 {
     int add(int a, int b)
@@ -23,7 +25,7 @@ namespace math
         err = 0;
         if (b == 0 )
         {
-            err = -1;
+            err = DIV_BY_ZERO;
             return 0;
         }
         return a / b;
@@ -47,7 +49,7 @@ namespace math
         {
             if (result > INT_MAX / a)
             {
-                return -1;
+                return OVERFLOW;
             }
 
             result *= a;
@@ -66,7 +68,7 @@ namespace math
         }
         if (a > maxFactorial)
         {
-            return -1;
+            return OVERFLOW;
         }
         return a * factorial(a - 1);
     }
