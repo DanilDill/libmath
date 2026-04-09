@@ -1,6 +1,6 @@
 #pragma once
 #include <climits>
-
+#include <math.h>
 #define DIV_BY_ZERO -1
 #define OVERFLOW -2
 namespace math 
@@ -47,7 +47,7 @@ namespace math
         int result = 1;
         for (unsigned int i = 0; i < b; i++)
         {
-            if (result > INT_MAX / a)
+            if (abs(result) > INT_MAX / a)
             {
                 err =  OVERFLOW;
                 return result; 
