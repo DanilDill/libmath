@@ -42,14 +42,15 @@ namespace math
         return a % b;
     }
 
-    int pow(int a, unsigned int b)
+    int pow(int a, unsigned int b, int& err)
     {
         int result = 1;
         for (unsigned int i = 0; i < b; i++)
         {
             if (result > INT_MAX / a)
             {
-                return OVERFLOW;
+                err =  OVERFLOW;
+                return result; 
             }
 
             result *= a;
