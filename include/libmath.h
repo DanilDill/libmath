@@ -8,6 +8,7 @@ namespace math
 {
     int add(int a, int b, int& err)
     {
+        err = 0;
         int result;
         if (__builtin_add_overflow(a, b, &result))
         {
@@ -18,6 +19,7 @@ namespace math
 
     int sub(int a, int b, int& err)
     {
+        err = 0;
         int result;
         if(__builtin_sub_overflow(a, b, &result))
         {
@@ -28,6 +30,7 @@ namespace math
 
 int mul(int a, int b,int& err)
 {
+    err = 0;
     int result;
     if(__builtin_mul_overflow(a, b, &result))
     {
@@ -50,6 +53,7 @@ int div(int a, int b, int& err)
 
 int pow(int a, unsigned int b, int& err)
 {
+    err = 0;
     int result = 1;
     for (unsigned int i = 0; i < b; i++)
     {
@@ -65,6 +69,7 @@ int pow(int a, unsigned int b, int& err)
 int factorial(unsigned int a, int& err)
 {
     static int maxFactorial = 12;
+    err = 0;
     int result = 1;
     if (result == a)
     {
