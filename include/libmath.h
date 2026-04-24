@@ -6,20 +6,30 @@
 #define OVERFLOW -2
 namespace math
 {
-int add(int a, int b)
-{
-    return a + b;
-}
+    int add(int a, int b, int& err)
+    {
+        int result;
+        if (__builtin_add_overflow(a, b, &result))
+        {
+            err = OVERFLOW;
+        }
+        return result;
+    }
 
-int sub(int a, int b)
-{
-    return a - b;
-}
+    int sub(int a, int b, int& err)
+    {
+        int result;
+        if(__builtin_sub_overflow(a, b, &result))
+        {
+            err = OVERFLOW;
+        }
+        return result;
+    }
 
 int mul(int a, int b,int& err)
 {
-    int result = a*b;
-    if(abs(result) > INT_MAX / abs(a))
+    int result;
+    if(__builtin_mul_overflow(a, b, &result))
     {
         err = OVERFLOW;
     }
@@ -37,29 +47,17 @@ int div(int a, int b, int& err)
     return a / b;
 }
 
-int mod(int a, int b, int& err)
-{
-    err = 0;
-    if (b == 0)
-    {
-        err = -1;
-        return 0; /* code */
-    }
-    return a % b;
-}
 
 int pow(int a, unsigned int b, int& err)
 {
     int result = 1;
     for (unsigned int i = 0; i < b; i++)
     {
-        if (abs(result) > INT_MAX / abs(a))
+        if (__builtin_mul_overflow(result, a, &result))
         {
             err = OVERFLOW;
             return result;
         }
-
-        result *= a;
     }
     return result;
 }
